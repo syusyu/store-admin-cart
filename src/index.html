@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>store-admin-cart</title>
     <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href="css/bootstrap.min.css"/>
     <link rel="stylesheet" href="css/font-awesome.css"/>
     <link rel="stylesheet" href="css/spa_page_manager.css"/>
     <link rel="stylesheet" href="css/style.css"/>
@@ -17,24 +16,25 @@
     </div>
 </div>
 
-<div class="main">
+<div id="main">
     <div class="sidemenu">
         <ul>
-            <li>Create order</li>
-            <li>Modify order</li>
+            <li><a href="javascript:void(0);" data-action-click-id="init-create-order">Create order</a></li>
+            <li><a href="javascript:void(0);" data-action-click-id="init--modify-order">Modify order</a></li>
         </ul>
     </div>
     <div class="contents-wrapper">
-        <div id="contents-create-order" class="">
+        <div id="contents-create-order" class="spa-page create-order">
             Create order
             <div id="box-customer" class="contents-box">
                 <h3>Customer</h3>
             </div>
         </div>
-        <div id="contents-modify-order" class="">
+        <div id="contents-modify-order" class="spa-page modify-order">
             Modify order
         </div>
     </div>
+    <input type="hidden" id="server-host" value="."/>
 </div>
 
 
@@ -45,11 +45,11 @@
 <script src="js/jquery/jquery.js"></script>
 <script src="js/jquery/jquery.uriAnchor.js"></script>
 <script src="js/spa_page_manager.js"></script>
-<script src="js/user_service.js"></script>
+<script src="js/cart.js"></script>
 <script>
     $(function () {
         var is_debug_mode = true;
-        plan_change.initModule($('#plan-change-container'), $('#server-host'), {'contractId': $('#contract-id').val()}, is_debug_mode);
+        cart.initModule($('#main'), is_debug_mode);
     });
 </script>
 

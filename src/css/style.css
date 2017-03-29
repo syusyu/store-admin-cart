@@ -33,7 +33,7 @@
 }
 
 /***** main *****/
-.main {
+#main {
     display: flex;
 }
 .sidemenu {
