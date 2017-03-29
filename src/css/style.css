@@ -54,7 +54,13 @@
 
 .contents-box {
     border: dotted 1px darkgray;
-    /*padding: 10px;*/
+    margin-top: 5px;
+    padding: 0px;
+}
+
+.contents-title {
+    font-color: navy;
+    text-decoration: underline;
 }
 
 

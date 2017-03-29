@@ -19,18 +19,51 @@
 <div id="main">
     <div class="sidemenu">
         <ul>
-            <li><a href="javascript:void(0);" data-action-click-id="init-create-order">Create order</a></li>
-            <li><a href="javascript:void(0);" data-action-click-id="init--modify-order">Modify order</a></li>
+            <li><a href="javascript:void(0);" data-action-click-id="init-select-customer">Create order</a></li>
+            <li><a href="javascript:void(0);" data-action-click-id="init-modify-order">Modify order</a></li>
         </ul>
     </div>
     <div class="contents-wrapper">
-        <div id="contents-create-order" class="spa-page create-order">
-            Create order
-            <div id="box-customer" class="contents-box">
-                <h3>Customer</h3>
+        <div id="contents-select-customer" class="spa-page page-select-customer">
+            <div id="box-customer-select" class="contents-box">
+                <p class="contents-title">Customer</p>
+                <input type="text" id="search-customer-text" /><button id="search-customer-btn">Search</button>
+                <table class="search-customer-result" data-bind-show-if-not-empty="CUSTOMER.search_result">
+                    <thead>
+                    <th>Name</th>
+                    <th></th>
+                    </thead>
+                    <tbody data-bind-loop="CUSTOMER.search_result">
+                    <tr>
+                        <td data-bind-text="CUSTOMER.search_result.name"></td>
+                        <td><button>Select</button></td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
-        <div id="contents-modify-order" class="spa-page modify-order">
+
+        <div id="contents-create-order" class="spa-page page-create-order">
+            Create order
+            <div id="box-customer" class="contents-box">
+                <p class="contents-title">Customer</p>
+                <div data-bind-show-if-not-empty="CUSTOMER.search_result">
+                    Selected customer: <span data-bind-text="CUSTOMER.selected_customer.name"></span>
+                </div>
+            </div>
+            <div id="box-item" class="contents-box">
+                <p class="contents-title">Item</p>
+            </div>
+            <div id="box-shipping" class="contents-box">
+                <p class="contents-title">Shipping</p>
+                <p>Here might be very complicated.</p>
+            </div>
+            <div id="box-payment" class="contents-box">
+                <p class="contents-title">Payment</p>
+            </div>
+        </div>
+
+        <div id="contents-modify-order" class="spa-page page-modify-order">
             Modify order
         </div>
     </div>
