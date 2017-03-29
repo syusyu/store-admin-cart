@@ -55,6 +55,11 @@
 .contents-box {
     border: dotted 1px darkgray;
     margin-top: 5px;
+    padding: 5px;
+}
+
+.contents-box-no-boarder {
+    margin-top: 5px;
     padding: 0px;
 }
 
@@ -63,4 +68,28 @@
     text-decoration: underline;
 }
 
+.detail-condition {
+    font-size: small;
+}
 
+.tbl-search-result {
+    margin: 5px 0px 10px;
+    border: 1px solid #e3e3e3;
+}
+.tbl-search-result th {
+    width: 25%;
+    text-align: left;
+    padding: 10px 5px 5px 25px;
+    border: 1px solid #e3e3e3;
+    border-style: solid none;
+    font-weight: normal;
+    vertical-align: middle;
+    background-color: #f6f6f6;
+}
+.tbl-search-result td {
+    vertical-align: middle;
+    background: #FFF;
+    padding: 10px 5px 5px 25px;
+    border: 1px solid #e3e3e3;
+    border-style: solid none;
+}

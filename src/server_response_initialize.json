@@ -1,18 +1,1 @@
-{
-  "CUSTOMER": {
-    "search_result": [
-      {
-        "id": "001",
-        "name": "Michel"
-      },
-      {
-        "id": "002",
-        "name": "Johny"
-      }
-    ],
-    "selected_customer": {
-      "id": "001",
-      "name": "Michel"
-    }
-  }
-}
+{}

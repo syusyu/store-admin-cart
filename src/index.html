@@ -1,78 +1,208 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>store-admin-cart</title>
-    <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href="css/font-awesome.css"/>
-    <link rel="stylesheet" href="css/spa_page_manager.css"/>
-    <link rel="stylesheet" href="css/style.css"/>
+	<meta charset="UTF-8">
+	<title>store-admin-cart</title>
+	<meta name="viewport" content="width=device-width">
+	<link rel="stylesheet" href="css/font-awesome.css"/>
+	<link rel="stylesheet" href="css/spa_page_manager.css"/>
+	<link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
 
 <div class="header">
-    <div class="">
-        <h1><a href=""><img src="img/icon.png" class="logo">Store-admin-front</a></h1>
-    </div>
+	<div class="">
+		<h1><a href=""><img src="img/icon.png" class="logo">Store-admin-front</a></h1>
+	</div>
 </div>
 
 <div id="main">
-    <div class="sidemenu">
-        <ul>
-            <li><a href="javascript:void(0);" data-action-click-id="init-select-customer">Create order</a></li>
-            <li><a href="javascript:void(0);" data-action-click-id="init-modify-order">Modify order</a></li>
-        </ul>
-    </div>
-    <div class="contents-wrapper">
-        <div id="contents-select-customer" class="spa-page page-select-customer">
-            <div id="box-customer-select" class="contents-box">
-                <p class="contents-title">Customer</p>
-                <input type="text" id="search-customer-text" /><button id="search-customer-btn">Search</button>
-                <table class="search-customer-result" data-bind-show-if-not-empty="CUSTOMER.search_result">
-                    <thead>
-                    <th>Name</th>
-                    <th></th>
-                    </thead>
-                    <tbody data-bind-loop="CUSTOMER.search_result">
-                    <tr>
-                        <td data-bind-text="CUSTOMER.search_result.name"></td>
-                        <td><button>Select</button></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+	<div class="sidemenu">
+		<ul>
+			<li><a href="javascript:void(0);" data-action-click-id="init-select-customer">Create order</a></li>
+			<li><a href="javascript:void(0);" data-action-click-id="init-modify-order">Modify order</a></li>
+		</ul>
+	</div>
+	<div class="contents-wrapper">
 
-        <div id="contents-create-order" class="spa-page page-create-order">
-            Create order
-            <div id="box-customer" class="contents-box">
-                <p class="contents-title">Customer</p>
-                <div data-bind-show-if-not-empty="CUSTOMER.search_result">
-                    Selected customer: <span data-bind-text="CUSTOMER.selected_customer.name"></span>
-                </div>
-            </div>
-            <div id="box-item" class="contents-box">
-                <p class="contents-title">Item</p>
-            </div>
-            <div id="box-shipping" class="contents-box">
-                <p class="contents-title">Shipping</p>
-                <p>Here might be very complicated.</p>
-            </div>
-            <div id="box-payment" class="contents-box">
-                <p class="contents-title">Payment</p>
-            </div>
-        </div>
+		<!-- ============================== CUSTOMER ============================== -->
+		<div id="contents-select-customer" class="spa-page page-select-customer">
+			<h2>Create order</h2>
+			<div id="box-customer-select" class="contents-box-no-boarder">
 
-        <div id="contents-modify-order" class="spa-page page-modify-order">
-            Modify order
-        </div>
-    </div>
-    <input type="hidden" id="server-host" value="."/>
+				<p class="contents-title">Customer</p>
+
+				<input type="text" id="search-customer-text"/>
+				<button id="search-customer-btn" data-action-click-id="search-customer">Search</button>
+
+				<div>
+					<a href="" class="detail-condition">more condition</a>
+				</div>
+
+				<table class="tbl-search-result" data-bind-show-if-not-empty="CUSTOMER.search_result">
+					<thead>
+					<th>Name</th>
+					<th></th>
+					</thead>
+					<tbody data-bind-loop="CUSTOMER.search_result">
+					<tr>
+						<td data-bind-text="CUSTOMER.search_result.name"></td>
+						<td>
+							<button data-action-click-id="select-customer">Select</button>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div id="contents-create-order" class="spa-page page-create-order">
+			<h2>Create order</h2>
+
+			<!-- ============================== SELECTED CUSTOMER  ============================== -->
+			<p>
+				Selected customer: <span data-bind-text="CUSTOMER.selected_customer.name"></span>
+				<a href="javascript:void(0);" data-action-click-id="change-customer">Change</a>
+			</p>
+
+			<!-- ============================== ITEM ============================== -->
+			<div id="box-item" class="contents-box">
+				<p class="contents-title">Item</p>
+
+				<!-- ====== item search ====== -->
+				<div data-bind-show-if-eq="ITEM.select_state=SELECTING">
+					<input type="text" id="search-item-text"/>
+					<button id="search-item-btn" data-action-click-id="search-item">Search</button>
+				</div>
+
+				<div data-bind-show-if-eq="ITEM.select_state=SELECTED">
+					<table class="tbl-search-result" data-bind-show-if-not-empty="ITEM.search_result">
+						<thead>
+						<th>Name</th>
+						<th></th>
+						</thead>
+						<tbody data-bind-loop="ITEM.selected_items">
+						<tr>
+							<td>
+								<label>
+									<span data-bind-text="ITEM.selected_items.name"></span>
+								</label>
+							</td>
+							<td>
+								<span data-bind-text="ITEM.selected_items.qty" data-bind-show-if-eq="ITEM.edit_mode=READ"></span>
+
+								<select data-bind-show-if-eq="ITEM.edit_mode=EDIT">
+									<option>1</option>
+									<option>2</option>
+								</select>
+
+								<button data-action-click-id="remove-item" data-bind-show-if-eq="ITEM.edit_mode=EDIT">Remove</button>
+							</td>
+						</tr>
+						</tbody>
+					</table>
+
+					<div data-bind-show-if-eq="ITEM.edit_mode=READ">
+						<a href="javascript:void(0);" data-action-click-id="add-item">Add</a>
+						<a href="javascript:void(0);" data-action-click-id="change-item">Change</a>
+					</div>
+					<div data-bind-show-if-eq="ITEM.edit_mode=EDIT">
+						<button data-action-click-id="update-item">Update</button>
+					</div>
+				</div>
+			</div>
+
+			<!-- ============================== ITEM SEARCH POPUP ============================== -->
+			<div class="spa-page modal page-select-item">
+				<div class="spa-modal">
+					<div class="spa-modal-container">
+						<div class="spa-modal-contents-title">
+							<p class="spa-modal-contents-title-left">注意事項</p>
+							<p class="spa-modal-close" data-action-click-id="back-to-create-order">×</p>
+						</div>
+						<div class="spa-modal-contents-body">
+							<table class="tbl-search-result" data-bind-show-if-not-empty="ITEM.search_result">
+								<thead>
+								<th>Name</th>
+								<th></th>
+								</thead>
+								<tbody data-bind-loop="ITEM.search_result">
+								<tr>
+									<td>
+										<label>
+											<input type="checkbox"/>
+											<span data-bind-text="ITEM.search_result.name"></span>
+										</label>
+									</td>
+									<td>
+										<select>
+											<option>1</option>
+											<option>2</option>
+										</select>
+									</td>
+								</tr>
+								</tbody>
+							</table>
+
+							<button id="select-item-btn" data-action-click-id="select-item">Select</button>
+						</div>
+					</div>
+				</div>
+				<div class="spa-modal-overlay" data-action-click-id="back-to-create-order"></div>
+			</div>
+
+			<div id="box-shipping" class="contents-box">
+				<p class="contents-title">Shipping</p>
+				<p>Here might be very complicated.</p>
+			</div>
+
+			<!-- ============================== PAYMENT ============================== -->
+			<div id="box-payment" class="contents-box">
+				<p class="contents-title">Payment</p>
+				<lable><input type="radio">Credit card</lable>
+				<div>
+					<div>
+						Number:
+						<input type="text" class="credit_num_text">
+						-<input type="text" class="credit_num_text">
+						-<input type="text" class="credit_num_text">
+						-<input type="text" class="credit_num_text">
+					</div>
+					<div>
+						Expiry:
+						<input type="text" class="credit_num_text">
+						<input type="text" class="credit_num_text">
+					</div>
+					<div>
+						Name:
+						<input type="text" class="credit_name">
+					</div>
+					<div>
+						Security code:
+						<input type="text" class="credit_name">
+					</div>
+				</div>
+				<lable><input type="radio">Cach on Delivery</lable>
+				<div>
+
+				</div>
+				<lable><input type="radio">Pay easy</lable>
+				<div>
+
+				</div>
+			</div>
+		</div>
+
+		<div id="contents-modify-order" class="spa-page page-modify-order">
+			<h2>Modify order</h2>
+		</div>
+	</div>
+	<input type="hidden" id="server-host" value="."/>
 </div>
 
 
 <div class="footer">
-    <p>Copy right &copy; EC development team</p>
+	<p>Copy right &copy; EC development team</p>
 </div>
 
 <script src="js/jquery/jquery.js"></script>
