@@ -9,24 +9,8 @@ var cart = (function () {
 
     initModule = function ($container, is_debug_mode) {
         var
-            server_host = '.',
-
-            PATH_INIT = server_host + '/server_response_initialize.json',
-
-            initSelectCustomer = spa_page_transition.createFunc(function (observer, anchor_map) {
-                getLogger().debug('initSelectCustomer is called!', anchor_map);
-                cart.model.init_model();
-                observer.trigger('CUSTOMER', cart.model.get_customer());
-                observer.trigger('ITEM', cart.model.get_item());
-            }),
-
-            initOrderCreation = spa_page_transition.createFunc(function (observer, anchor_map) {
-                getLogger().debug('initOrderCreation is called!', anchor_map);
-            }),
-
             initOrderModification = spa_page_transition.createFunc(function (observer, anchor_map) {
                 getLogger().debug('initOrderModification is called!', anchor_map);
-                // observer.trigger('FACTOR', cart.model.remove_factor(anchor_map.id));
             }),
 
             searchCustomer = spa_page_transition.createFunc(function (observer, anchor_map) {
@@ -39,9 +23,9 @@ var cart = (function () {
                 observer.trigger('CUSTOMER', cart.model.select_customer());
             }),
 
-            changeCustomer = spa_page_transition.createFunc(function (observer, anchor_map) {
-                getLogger().debug('changeCustomer is called!', anchor_map);
-                observer.trigger('CUSTOMER', cart.model.change_customer());
+            initItem = spa_page_transition.createFunc(function (observer, anchor_map) {
+                getLogger().debug('initItem is called!', anchor_map);
+                observer.trigger('ITEM', cart.model.init_item());
             }),
 
             searchItem = spa_page_transition.createFunc(function (observer, anchor_map) {
@@ -74,9 +58,8 @@ var cart = (function () {
                 observer.trigger('ITEM', cart.model.update_item());
             }),
 
-            initializationFunc = spa_page_transition.createAjaxFunc(PATH_INIT, null, function (observer, anchor_map, data) {
-                getLogger().debug('initial data loaded!');
-                // cart.model.prepare(data);
+            initializationFunc = spa_page_transition.createFunc(function (observer, anchor_map) {
+                getLogger().debug('initializationFunc is called!');
                 cart.model.init_model();
                 observer.trigger('CUSTOMER', cart.model.get_customer());
                 observer.trigger('ITEM', cart.model.get_item());
@@ -89,15 +72,15 @@ var cart = (function () {
 
         spa_page_transition.debugMode(is_debug_mode).initialize(initializationFunc)
             .addAction(spa_page_transition.model.START_ACTION, 'page-select-customer')
-            .addAction('init-select-customer', 'page-select-customer', [initSelectCustomer])
+            .addAction('init-select-customer', 'page-select-customer', [initializationFunc])
             .addAction('init-modify-order', 'page-modify-order', [initOrderModification])
             .addAction('search-customer', 'page-select-customer', [searchCustomer])
-            .addAction('select-customer', 'page-create-order', [selectCustomer])
-            .addAction('change-customer', 'page-select-customer', [changeCustomer])
+            .addAction('select-customer', 'page-create-order', [selectCustomer, initItem])
+            .addAction('change-customer', 'page-select-customer', [initializationFunc])
             .addAction('search-item', 'page-select-item', [searchItem])
             .addAction('back-to-create-order', 'page-create-order')
             .addAction('select-item', 'page-create-order', [selectItem])
-            .addAction('add-item', 'page-select-item', [addItem])
+            .addAction('add-item', 'page-create-order', [addItem])
             .addAction('change-item', 'page-create-order', [changeItem])
             .addAction('remove-item', 'page-create-order', [removeItem])
             .addAction('update-item', 'page-create-order', [updateItem])
@@ -114,7 +97,7 @@ cart.model = (function () {
 
     var
         _customer, init_model, get_customer, search_customer, select_customer, change_customer,
-        _item, get_item, search_item, select_item, change_item, add_item, remove_item, update_item,
+        _item, init_item, get_item, search_item, select_item, change_item, add_item, remove_item, update_item,
         prepare;
 
     prepare = function (data) {
@@ -125,8 +108,7 @@ cart.model = (function () {
         _item = {};
         _item.search_result = {};
         _item.selected_items = [];
-        _item.select_state = 'SELECTING';
-        _item.edit_mode = 'READ';
+        _item.edit_mode = 'ADD';
     };
     get_customer = function () {
         return _customer;
@@ -156,6 +138,13 @@ cart.model = (function () {
         return get_customer();
     };
 
+    init_item = function () {
+        _item = {};
+        _item.search_result = {};
+        _item.selected_items = [];
+        _item.edit_mode = 'ADD';
+        return get_item();
+    };
     get_item = function () {
         return _item;
     };
@@ -192,8 +181,7 @@ cart.model = (function () {
                 "qty": 3
             }
         ];
-        _item.select_state = 'SELECTED';
-        _item.edit_mode = 'EDIT';
+        _item.edit_mode = 'READ';
         return get_item();
     };
     change_item = function () {
@@ -201,33 +189,7 @@ cart.model = (function () {
         return get_item();
     };
     add_item = function () {
-        _item.search_result = [
-            {
-                "id": "100",
-                "name": "TV",
-                "qty": 1
-            },
-            {
-                "id": "200",
-                "name": "PC",
-                "qty": 2
-            },
-            {
-                "id": "300",
-                "name": "Monitor",
-                "qty": 3
-            },
-            {
-                "id": "400",
-                "name": "Mouse",
-                "qty": 4
-            },
-            {
-                "id": "500",
-                "name": "Note PC",
-                "qty": 5
-            }
-        ];
+        _item.edit_mode = 'ADD';
         return get_item();
     };
     remove_item = function () {
@@ -259,10 +221,13 @@ cart.model = (function () {
 
     return {
         init_model: init_model,
+
         get_customer: get_customer,
         search_customer: search_customer,
         select_customer: select_customer,
         change_customer: change_customer,
+
+        init_item: init_item,
         get_item: get_item,
         search_item: search_item,
         select_item: select_item,
@@ -270,6 +235,7 @@ cart.model = (function () {
         add_item: add_item,
         remove_item: remove_item,
         update_item: update_item,
+
         prepare: prepare
     }
 

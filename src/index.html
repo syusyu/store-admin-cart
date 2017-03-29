@@ -69,14 +69,9 @@
 			<div id="box-item" class="contents-box">
 				<p class="contents-title">Item</p>
 
-				<!-- ====== item search ====== -->
-				<div data-bind-show-if-eq="ITEM.select_state=SELECTING">
-					<input type="text" id="search-item-text"/>
-					<button id="search-item-btn" data-action-click-id="search-item">Search</button>
-				</div>
-
-				<div data-bind-show-if-eq="ITEM.select_state=SELECTED">
-					<table class="tbl-search-result" data-bind-show-if-not-empty="ITEM.search_result">
+				<!-- ====== selected items ====== -->
+				<div data-bind-show-if-not-empty="ITEM.selected_items">
+					<table class="tbl-search-result">
 						<thead>
 						<th>Name</th>
 						<th></th>
@@ -110,6 +105,12 @@
 						<button data-action-click-id="update-item">Update</button>
 					</div>
 				</div>
+
+				<!-- ====== item search ====== -->
+				<div data-bind-show-if-eq="ITEM.edit_mode=ADD">
+					<input type="text" id="search-item-text"/>
+					<button id="search-item-btn" data-action-click-id="search-item">Search</button>
+				</div>
 			</div>
 
 			<!-- ============================== ITEM SEARCH POPUP ============================== -->
@@ -117,7 +118,7 @@
 				<div class="spa-modal">
 					<div class="spa-modal-container">
 						<div class="spa-modal-contents-title">
-							<p class="spa-modal-contents-title-left">注意事項</p>
+							<p class="spa-modal-contents-title-left"></p>
 							<p class="spa-modal-close" data-action-click-id="back-to-create-order">×</p>
 						</div>
 						<div class="spa-modal-contents-body">
