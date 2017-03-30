@@ -1,3 +1,4 @@
+
 /***** header *****/
 .header {
     padding: 10px 10px 0 10px;
@@ -23,7 +24,6 @@
     height: 50px;
 }
 
-
 /***** footer *****/
 .footer {
     color: #fff;
@@ -36,12 +36,14 @@
 #main {
     display: flex;
 }
+
 .sidemenu {
     border: solid 1px #b0c4de;
     margin: 0px 10px 10px 0px;
     flex: 1;
 }
 
+/***** contents-wrapper *****/
 .contents-wrapper {
     border: solid 1px #b0c4de;
     margin: 0px 0px 10px 0px;
@@ -50,6 +52,15 @@
     flex: 5;
     display: flex;
     flex-direction: column;
+}
+.contents-wrapper p {
+    margin: 0px;
+}
+.contents-wrapper ul {
+    margin: 0px;
+}
+.contents-wrapper h2 {
+    margin: 0px;
 }
 
 .contents-box {
@@ -92,4 +103,55 @@
     padding: 10px 5px 5px 25px;
     border: 1px solid #e3e3e3;
     border-style: solid none;
+}
+
+.hide {
+    display: none;
+}
+.show {
+    display: block;
+}
+
+.contents-error-hide {
+    opacity: 0;
+    margin: 25px 0px 0px 40px;
+    position: fixed;
+}
+
+.contents-error-show {
+    opacity: 0.8;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 10;
+    position: fixed;
+    width: 260px;
+    height: 40px;
+    margin: -20px 0px 0px 250px;
+
+    color: #ffffff;
+    background-color: #ff0000;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+}
+
+
+
+/***** PAYMENT *****/
+.paymethod-box {
+    margin: 0px 0px 10px 0px;
+}
+
+/***** BUTTON *****/
+#box-bottom-button {
+    display: flex;
+    justify-content: flex-end;
 }

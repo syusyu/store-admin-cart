@@ -69,6 +69,11 @@
 			<div id="box-item" class="contents-box">
 				<p class="contents-title">Item</p>
 
+				<!-- ====== item error ====== -->
+				<div id="item-error" class="contents-error-hide">
+					Please select some items.
+				</div>
+
 				<!-- ====== selected items ====== -->
 				<div data-bind-show-if-not-empty="ITEM.selected_items">
 					<table class="tbl-search-result">
@@ -158,39 +163,79 @@
 			<!-- ============================== PAYMENT ============================== -->
 			<div id="box-payment" class="contents-box">
 				<p class="contents-title">Payment</p>
-				<lable><input type="radio">Credit card</lable>
-				<div>
-					<div>
-						Number:
-						<input type="text" class="credit_num_text">
-						-<input type="text" class="credit_num_text">
-						-<input type="text" class="credit_num_text">
-						-<input type="text" class="credit_num_text">
-					</div>
-					<div>
-						Expiry:
-						<input type="text" class="credit_num_text">
-						<input type="text" class="credit_num_text">
-					</div>
-					<div>
-						Name:
-						<input type="text" class="credit_name">
-					</div>
-					<div>
-						Security code:
-						<input type="text" class="credit_name">
-					</div>
-				</div>
-				<lable><input type="radio">Cach on Delivery</lable>
-				<div>
+				<div class="paymethod-box">
+					<p>Credit cards</p>
 
+					<!-- ====== credit card error ====== -->
+					<div id="credit-card-error" class="contents-error-hide">
+						Please input credit card number.
+					</div>
+
+					<ul>
+						<li>
+							<label><input type="radio" name="paymethod" checked="checked"/><span>xxxx-xxxx-xxxx-1111</span></label>
+						</li>
+						<li>
+							<label><input type="radio" name="paymethod"/><span>xxxx-xxxx-xxxx-1112</span></label>
+						</li>
+						<li>
+							<label><input type="radio" name="paymethod"/><span>xxxx-xxxx-xxxx-1113</span></label>
+						</li>
+						<li>
+							<label><input type="radio" name="paymethod" data-view-toggle-trigger="input-new-credit-card" /><span>Use new card</span></label>
+						</li>
+					</ul>
+
+					<div class="hide" data-view-toggle-class="input-new-credit-card, show, hide:inverse">
+						<div>
+							Number:
+							<input type="text" class="credit_num_text" value="" />
+							-<input type="text" class="credit_num_text" value="" />
+							-<input type="text" class="credit_num_text" value="" />
+							-<input type="text" class="credit_num_text" value="" />
+						</div>
+						<div>
+							Expiry:
+							<input type="text" class="credit_expiry">
+							<input type="text" class="credit_expiry">
+						</div>
+						<div>
+							Name:
+							<input type="text" class="credit_name">
+						</div>
+						<div>
+							Security code:
+							<input type="text" class="credit_name">
+						</div>
+					</div>
 				</div>
-				<lable><input type="radio">Pay easy</lable>
+
+				<label><input type="radio" name="paymethod"/><span>Cach on Delivery</span></label>
+				<div>
+				</div>
+
+				<label><input type="radio" name="paymethod"/><span>Pay Easy</span></label>
 				<div>
 
 				</div>
 			</div>
+
+			<!-- ============================== BUTTON ============================== -->
+			<div id="box-bottom-button" class="contents-box">
+				<button data-action-click-id="next-to-confirm">Confirm</button>
+			</div>
 		</div>
+
+		<!-- ============================== BUTTON ============================== -->
+		<div class="spa-page page-create-order-confirm">
+			<h2>Confirm order</h2>
+			<div class="contents-box">
+				<button data-action-click-id="back-to-create-order">Back</button>
+				<button data-action-click-id="">Create order</button>
+			</div>
+		</div>
+
+
 
 		<div id="contents-modify-order" class="spa-page page-modify-order">
 			<h2>Modify order</h2>
@@ -208,6 +253,7 @@
 <script src="js/jquery/jquery.uriAnchor.js"></script>
 <script src="js/spa_page_manager.js"></script>
 <script src="js/cart.js"></script>
+<script src="js/cart.model.js"></script>
 <script>
     $(function () {
         var is_debug_mode = true;
