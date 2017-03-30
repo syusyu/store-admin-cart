@@ -168,8 +168,18 @@
 .credit_sec_code {
     width: 60px;
 }
+
+/***** CONFIRM *****/
+.contents-confirm-box {
+    margin: 0px 0px 10px 30px;
+}
+
 /***** BUTTON *****/
 #box-bottom-button {
     display: flex;
     justify-content: flex-end;
+}
+#box-bottom-button-confirm {
+    display: flex;
+    justify-content: center;
 }
