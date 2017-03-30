@@ -84,25 +84,19 @@
 								</label>
 							</td>
 							<td>
-								<span data-bind-text="ITEM.selected_items.qty" data-bind-show-if-eq="ITEM.edit_mode=READ"></span>
-
-								<select data-bind-show-if-eq="ITEM.edit_mode=EDIT">
+								<select>
 									<option>1</option>
 									<option>2</option>
 								</select>
 
-								<button data-action-click-id="remove-item" data-bind-show-if-eq="ITEM.edit_mode=EDIT">Remove</button>
+								<button data-action-click-id="remove-item">Remove</button>
 							</td>
 						</tr>
 						</tbody>
 					</table>
 
-					<div data-bind-show-if-eq="ITEM.edit_mode=READ">
+					<div data-bind-show-if-not-eq="ITEM.edit_mode=ADD">
 						<a href="javascript:void(0);" data-action-click-id="add-item">Add</a>
-						<a href="javascript:void(0);" data-action-click-id="change-item">Change</a>
-					</div>
-					<div data-bind-show-if-eq="ITEM.edit_mode=EDIT">
-						<button data-action-click-id="update-item">Update</button>
 					</div>
 				</div>
 
@@ -126,6 +120,7 @@
 								<thead>
 								<th>Name</th>
 								<th></th>
+								<th></th>
 								</thead>
 								<tbody data-bind-loop="ITEM.search_result">
 								<tr>
@@ -140,6 +135,9 @@
 											<option>1</option>
 											<option>2</option>
 										</select>
+									</td>
+									<td>
+										<button data-action-click-id="select-item">Select</button>
 									</td>
 								</tr>
 								</tbody>

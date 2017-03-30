@@ -38,10 +38,10 @@ var cart = (function () {
                 observer.trigger('ITEM', cart.model.select_item());
             }),
 
-            changeItem = spa_page_transition.createFunc(function (observer, anchor_map) {
-                getLogger().debug('changeItem is called!', anchor_map);
-                observer.trigger('ITEM', cart.model.change_item());
-            }),
+            // changeItem = spa_page_transition.createFunc(function (observer, anchor_map) {
+            //     getLogger().debug('changeItem is called!', anchor_map);
+            //     observer.trigger('ITEM', cart.model.change_item());
+            // }),
 
             addItem = spa_page_transition.createFunc(function (observer, anchor_map) {
                 getLogger().debug('addItem is called!', anchor_map);
@@ -53,10 +53,10 @@ var cart = (function () {
                 observer.trigger('ITEM', cart.model.remove_item());
             }),
 
-            updateItem = spa_page_transition.createFunc(function (observer, anchor_map) {
-                getLogger().debug('updateItem is called!', anchor_map);
-                observer.trigger('ITEM', cart.model.update_item());
-            }),
+            // updateItem = spa_page_transition.createFunc(function (observer, anchor_map) {
+            //     getLogger().debug('updateItem is called!', anchor_map);
+            //     observer.trigger('ITEM', cart.model.update_item());
+            // }),
 
             initializationFunc = spa_page_transition.createFunc(function (observer, anchor_map) {
                 getLogger().debug('initializationFunc is called!');
@@ -81,9 +81,9 @@ var cart = (function () {
             .addAction('back-to-create-order', 'page-create-order')
             .addAction('select-item', 'page-create-order', [selectItem])
             .addAction('add-item', 'page-create-order', [addItem])
-            .addAction('change-item', 'page-create-order', [changeItem])
+            // .addAction('change-item', 'page-create-order', [changeItem])
             .addAction('remove-item', 'page-create-order', [removeItem])
-            .addAction('update-item', 'page-create-order', [updateItem])
+            // .addAction('update-item', 'page-create-order', [updateItem])
             .run();
     };
 
@@ -181,13 +181,14 @@ cart.model = (function () {
                 "qty": 3
             }
         ];
-        _item.edit_mode = 'READ';
-        return get_item();
-    };
-    change_item = function () {
+        // _item.edit_mode = 'READ';
         _item.edit_mode = 'EDIT';
         return get_item();
     };
+    // change_item = function () {
+    //     _item.edit_mode = 'EDIT';
+    //     return get_item();
+    // };
     add_item = function () {
         _item.edit_mode = 'ADD';
         return get_item();
@@ -202,22 +203,23 @@ cart.model = (function () {
         ];
         return get_item();
     };
-    update_item = function () {
-        _item.search_result = [
-            {
-                "id": "400",
-                "name": "Mouse",
-                "qty": 4
-            },
-            {
-                "id": "500",
-                "name": "Note PC",
-                "qty": 5
-            }
-        ];
-        _item.edit_mode = 'READ';
-        return get_item();
-    };
+    // update_item = function () {
+    //     _item.search_result = [
+    //         {
+    //             "id": "400",
+    //             "name": "Mouse",
+    //             "qty": 4
+    //         },
+    //         {
+    //             "id": "500",
+    //             "name": "Note PC",
+    //             "qty": 5
+    //         }
+    //     ];
+    //     // _item.edit_mode = 'READ';
+    //     _item.edit_mode = 'EDIT';
+    //     return get_item();
+    // };
 
     return {
         init_model: init_model,
