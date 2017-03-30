@@ -150,6 +150,24 @@
     margin: 0px 0px 10px 0px;
 }
 
+#credit-new-input-area {
+    margin: 0px 0px 10px 50px;
+    padding: 10px;
+    border: 1px solid #e3e3e3;
+}
+
+.credit_num_text {
+    width: 80px;
+}
+.credit_name {
+    width: 120px;
+}
+.credit_expiry {
+    width: 40px;
+}
+.credit_sec_code {
+    width: 60px;
+}
 /***** BUTTON *****/
 #box-bottom-button {
     display: flex;

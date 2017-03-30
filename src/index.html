@@ -21,6 +21,7 @@
 		<ul>
 			<li><a href="javascript:void(0);" data-action-click-id="init-select-customer">Create order</a></li>
 			<li><a href="javascript:void(0);" data-action-click-id="init-modify-order">Modify order</a></li>
+			<li><a href="javascript:void(0);" data-action-click-id="init-list-order">Order list</a></li>
 		</ul>
 	</div>
 	<div class="contents-wrapper">
@@ -176,37 +177,45 @@
 							<label><input type="radio" name="paymethod" checked="checked"/><span>xxxx-xxxx-xxxx-1111</span></label>
 						</li>
 						<li>
-							<label><input type="radio" name="paymethod"/><span>xxxx-xxxx-xxxx-1112</span></label>
+							<label><input type="radio" name="paymethod" /><span>xxxx-xxxx-xxxx-1112</span></label>
 						</li>
 						<li>
-							<label><input type="radio" name="paymethod"/><span>xxxx-xxxx-xxxx-1113</span></label>
+							<label><input type="radio" name="paymethod" /><span>xxxx-xxxx-xxxx-1113</span></label>
 						</li>
 						<li>
-							<label><input type="radio" name="paymethod" data-view-toggle-trigger="input-new-credit-card" /><span>Use new card</span></label>
+							<label><input type="radio" name="paymethod" value="paymethod-credit-new" /><span>Use new card</span></label>
 						</li>
 					</ul>
 
-					<div class="hide" data-view-toggle-class="input-new-credit-card, show, hide:inverse">
-						<div>
-							Number:
-							<input type="text" class="credit_num_text" value="" />
-							-<input type="text" class="credit_num_text" value="" />
-							-<input type="text" class="credit_num_text" value="" />
-							-<input type="text" class="credit_num_text" value="" />
-						</div>
-						<div>
-							Expiry:
-							<input type="text" class="credit_expiry">
-							<input type="text" class="credit_expiry">
-						</div>
-						<div>
-							Name:
-							<input type="text" class="credit_name">
-						</div>
-						<div>
-							Security code:
-							<input type="text" class="credit_name">
-						</div>
+					<div id="credit-new-input-area" class="hide">
+						<table>
+							<tbody>
+							<tr>
+								<th>Number</th>
+								<td>
+									<input type="text" class="credit_num_text" value="" />
+									-<input type="text" class="credit_num_text" value="" />
+									-<input type="text" class="credit_num_text" value="" />
+									-<input type="text" class="credit_num_text" value="" />
+								</td>
+							</tr>
+							<tr>
+								<th>Expiry</th>
+								<td>
+									<input type="text" class="credit_expiry">/
+									<input type="text" class="credit_expiry">
+								</td>
+							</tr>
+							<tr>
+								<th>Name</th>
+								<td><input type="text" class="credit_name"></td>
+							</tr>
+							<tr>
+								<th>Security code</th>
+								<td><input type="text" class="credit_sec_code"></td>
+							</tr>
+							</tbody>
+						</table>
 					</div>
 				</div>
 
@@ -216,7 +225,6 @@
 
 				<label><input type="radio" name="paymethod"/><span>Pay Easy</span></label>
 				<div>
-
 				</div>
 			</div>
 
@@ -236,9 +244,12 @@
 		</div>
 
 
-
+		<!-- ============================== UNNECESSARY MENUS ============================== -->
 		<div id="contents-modify-order" class="spa-page page-modify-order">
 			<h2>Modify order</h2>
+		</div>
+		<div id="contents-list-order" class="spa-page page-list-order">
+			<h2>Order List</h2>
 		</div>
 	</div>
 	<input type="hidden" id="server-host" value="."/>

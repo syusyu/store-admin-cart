@@ -1213,17 +1213,17 @@ spa_page_transition.data_bind = (function () {
                     has_trigger_status = $(this).prop('type') === 'checkbox' || $(this).prop('type') === 'radio',
                     trigger_status_on = has_trigger_status && ($(this).prop('checked') || $(this).prop('selected'));
                 view_toggle_trigger_proc(trigger_key, has_trigger_status, trigger_status_on);
-            },
-            'blur': function () {
-                var
-                    trigger_key = $(this).attr('data-view-toggle-trigger'),
-                    has_trigger_status = true,
-                    trigger_status_on = false;
-                if ($(this).prop('type') !== 'radio') {
-                    return false;
-                }
-                view_toggle_trigger_proc(trigger_key, has_trigger_status, trigger_status_on);
             }
+            // 'blur': function () {
+            //     var
+            //         trigger_key = $(this).attr('data-view-toggle-trigger'),
+            //         has_trigger_status = true,
+            //         trigger_status_on = false;
+            //     if ($(this).prop('type') !== 'radio') {
+            //         return false;
+            //     }
+            //     view_toggle_trigger_proc(trigger_key, has_trigger_status, trigger_status_on);
+            // }
         });
 
     };
