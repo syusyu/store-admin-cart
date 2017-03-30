@@ -36,8 +36,22 @@
 				<input type="text" id="search-customer-text"/>
 				<button id="search-customer-btn" data-action-click-id="search-customer">Search</button>
 
-				<div>
-					<a href="" class="detail-condition">more condition</a>
+				<!-- ======= DETAILED CONDITION ======= -->
+				<a href="javascript:void(0);" class="detail-condition-btn" data-view-toggle-trigger="toggle-slide-next:on">more condition</a>
+				<div class="toggle-slide-next-target detail-condition">
+					<table>
+						<tbody>
+						<tr>
+							<th>Code</th>
+							<td><input type="text" ></td>
+						</tr>
+						<tr>
+							<th>Name</th>
+							<td><input type="text" ></td>
+						</tr>
+						</tbody>
+					</table>
+					<button data-action-click-id="search-customer">Search</button>
 				</div>
 
 				<table class="tbl-search-result" data-bind-show-if-not-empty="CUSTOMER.search_result">
@@ -110,6 +124,24 @@
 				<div data-bind-show-if-eq="ITEM.edit_mode=ADD">
 					<input type="text" id="search-item-text"/>
 					<button id="search-item-btn" data-action-click-id="search-item">Search</button>
+
+					<!-- ======= DETAILED CONDITION ======= -->
+					<a href="javascript:void(0);" class="detail-condition-btn" data-view-toggle-trigger="toggle-slide-next:on">more condition</a>
+					<div class="toggle-slide-next-target detail-condition">
+						<table>
+							<tbody>
+							<tr>
+								<th>Code</th>
+								<td><input type="text" ></td>
+							</tr>
+							<tr>
+								<th>Name</th>
+								<td><input type="text" ></td>
+							</tr>
+							</tbody>
+						</table>
+						<button data-action-click-id="search-item">Search</button>
+					</div>
 				</div>
 			</div>
 

@@ -1206,55 +1206,38 @@ spa_page_transition.data_bind = (function () {
     })();
 
     run = function () {
-        $('[data-view-toggle-trigger]').on({
-            'click': function () {
-                var
-                    trigger_key = $(this).attr('data-view-toggle-trigger'),
-                    has_trigger_status = $(this).prop('type') === 'checkbox' || $(this).prop('type') === 'radio',
-                    trigger_status_on = has_trigger_status && ($(this).prop('checked') || $(this).prop('selected'));
-                view_toggle_trigger_proc(trigger_key, has_trigger_status, trigger_status_on);
-            }
-            // 'blur': function () {
-            //     var
-            //         trigger_key = $(this).attr('data-view-toggle-trigger'),
-            //         has_trigger_status = true,
-            //         trigger_status_on = false;
-            //     if ($(this).prop('type') !== 'radio') {
-            //         return false;
-            //     }
-            //     view_toggle_trigger_proc(trigger_key, has_trigger_status, trigger_status_on);
-            // }
-        });
-
-    };
-    var view_toggle_trigger_proc = function (trigger_key, has_trigger_status, trigger_status_on) {
-        $('[data-view-toggle-class]').each(function (idx, el) {
+        $('[data-view-toggle-trigger]').on('click', function (e_toggle) {
             var
-                toggle_class_list,
-                data_bind_toggle_attr = $(this).attr('data-view-toggle-class');
+                trigger_key = $(this).attr('data-view-toggle-trigger'),
+                has_trigger_status = $(this).prop('type') === 'checkbox' || $(this).prop('type') === 'radio',
+                trigger_status_on = has_trigger_status && ($(this).prop('checked') || $(this).prop('selected'));
 
-            toggle_class_list = evt_data_bind_view.get_toggle_class_list(
-                trigger_key, has_trigger_status, trigger_status_on, data_bind_toggle_attr);
+            $('[data-view-toggle-class]').each(function (idx, el) {
+                var
+                    toggle_class_list,
+                    data_bind_toggle_attr = $(this).attr('data-view-toggle-class');
 
-            $.each(toggle_class_list, function (idx, obj) {
-                if (obj.toggle_action_type === ENUM_TOGGLE_ACTION_TYPE.TOGGLE) {
-                    $(el).toggleClass(obj.toggle_class);
-                } else if (obj.toggle_action_type === ENUM_TOGGLE_ACTION_TYPE.ADD) {
-                    console.log('#######ADD.id=' + $(el).attr('id') + ', cls=' + obj.toggle_class);
-                    $(el).addClass(obj.toggle_class);
-                } else if (obj.toggle_action_type === ENUM_TOGGLE_ACTION_TYPE.REMOVE) {
-                    console.log('#######REMOVE.id=' + $(el).attr('id') + ', cls=' + obj.toggle_class);
-                    $(el).removeClass(obj.toggle_class);
-                }
+                toggle_class_list = evt_data_bind_view.get_toggle_class_list(
+                    trigger_key, has_trigger_status, trigger_status_on, data_bind_toggle_attr);
+
+                $.each(toggle_class_list, function (idx, obj) {
+                    if (obj.toggle_action_type === ENUM_TOGGLE_ACTION_TYPE.TOGGLE) {
+                        $(el).toggleClass(obj.toggle_class);
+                    } else if (obj.toggle_action_type === ENUM_TOGGLE_ACTION_TYPE.ADD) {
+                        $(el).addClass(obj.toggle_class);
+                    } else if (obj.toggle_action_type === ENUM_TOGGLE_ACTION_TYPE.REMOVE) {
+                        $(el).removeClass(obj.toggle_class);
+                    }
+                });
             });
-        });
 
-        if (trigger_key && trigger_key.indexOf('toggle-slide-next') === 0) {
-            $(this).next('.toggle-slide-next-target').slideToggle();
-        }
+            if (trigger_key && trigger_key.indexOf('toggle-slide-next') === 0) {
+                $(this).next('.toggle-slide-next-target').slideToggle();
+            }
+        });
 
         $('[data-view-toggle-trigger="toggle-slide-next:on"]').trigger('click');
-    }
+    };
 
     return {
         run: run,

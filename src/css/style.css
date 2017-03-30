@@ -143,7 +143,13 @@
     -moz-border-radius: 3px;
 }
 
-
+.detail-condition-btn {
+    margin: 0px 0px 0px 10px;
+    font-size: 12px;
+}
+.detail-condition {
+    margin: 10px 0px 0px 30px;
+}
 
 /***** PAYMENT *****/
 .paymethod-box {
